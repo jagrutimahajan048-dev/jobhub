@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online JobHub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <a class="logo" href="#home"><i class="fa-solid fa-briefcase"></i> Job<span>Hub</span></a>
+
+        <div class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#categories">Categories</a>
+            <a href="#jobs">Find Jobs</a>
+            <a href="#applications">My Applications</a>
+        </div>
+
+        <div class="nav-buttons" id="navButtons">
+            <button class="login-btn" onclick="openModal('loginModal')">Login</button>
+            <button class="register-btn" onclick="openModal('registerModal')">Register</button>
+        </div>
+
+        <div class="user-area" id="userArea" style="display:none">
+            <span id="welcomeUser"></span>
+            <button class="logout-btn" onclick="logoutUser()">Logout</button>
+        </div>
+
+        <button class="menu-btn" onclick="toggleMenu()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </nav>
+</header>
+<div class="demo-notice" role="note"><strong>Student demo:</strong> This site uses sample job data only. It does not provide real vacancies, create real accounts, or submit applications. Do not enter personal information.</div>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <span class="tag">YOUR CAREER STARTS HERE</span>
+        <h1>Find Your <span>Dream Job</span><br>With JobHub</h1>
+        <p>Explore sample job listings in this academic demonstration. Listings are illustrative and are not live vacancies.</p>
+
+        <div class="search-box">
+            <div><i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="Job title or company">
+            </div>
+            <div><i class="fa-solid fa-location-dot"></i>
+                <input type="text" id="locationInput" placeholder="City or location">
+            </div>
+            <button onclick="searchJobs()">Search Jobs</button>
+        </div>
+
+        <p class="popular">Popular:
+            <a href="#jobs" onclick="filterCategory('IT')">IT</a>
+            <a href="#jobs" onclick="filterCategory('Finance')">Finance</a>
+            <a href="#jobs" onclick="filterCategory('Marketing')">Marketing</a>
+        </p>
+    </div>
+
+    <div class="hero-image">
+        <i class="fa-solid fa-user-tie"></i>
+        <div class="floating-card"><i class="fa-solid fa-circle-check"></i> Find your opportunity!</div>
+    </div>
+</section>
+
+<section class="stats">
+    <div><h2>10,000+</h2><p>Active Jobs</p></div>
+    <div><h2>500+</h2><p>Companies</p></div>
+    <div><h2>25,000+</h2><p>Job Seekers</p></div>
+    <div><h2>5,000+</h2><p>Successful Hires</p></div>
+</section>
+
+<section class="section" id="categories">
+    <div class="section-heading">
+        <span>EXPLORE OPPORTUNITIES</span>
+        <h2>Popular Job Categories</h2>
+        <p>Choose your preferred career field</p>
+    </div>
+
+    <div class="category-grid">
+        <button class="category-card" onclick="filterCategory('IT')">
+            <i class="fa-solid fa-laptop-code"></i>
+            <h3>IT & Software</h3><p>120+ Jobs</p>
+        </button>
+        <button class="category-card" onclick="filterCategory('Finance')">
+            <i class="fa-solid fa-coins"></i>
+            <h3>Finance</h3><p>80+ Jobs</p>
+        </button>
+        <button class="category-card" onclick="filterCategory('Marketing')">
+            <i class="fa-solid fa-chart-line"></i>
+            <h3>Marketing</h3><p>65+ Jobs</p>
+        </button>
+        <button class="category-card" onclick="filterCategory('HR')">
+            <i class="fa-solid fa-users"></i>
+            <h3>Human Resource</h3><p>45+ Jobs</p>
+        </button>
+        <button class="category-card" onclick="filterCategory('Design')">
+            <i class="fa-solid fa-palette"></i>
+            <h3>Design</h3><p>35+ Jobs</p>
+        </button>
+        <button class="category-card" onclick="filterCategory('Sales')">
+            <i class="fa-solid fa-handshake"></i>
+            <h3>Sales</h3><p>50+ Jobs</p>
+        </button>
+    </div>
+</section>
+
+<section class="section jobs-section" id="jobs">
+    <div class="section-heading">
+        <span>CAREER OPPORTUNITIES</span>
+        <h2>Latest Job Openings</h2>
+        <p>Explore jobs from top companies</p>
+    </div>
+
+    <div class="job-toolbar">
+        <h3>Available Jobs</h3>
+        <button class="clear-btn" onclick="showAllJobs()">Show All Jobs</button>
+    </div>
+
+    <div class="jobs-grid" id="jobsContainer"></div>
+    <p id="noJobs" class="no-jobs">No jobs found. Try another search.</p>
+</section>
+
+<section class="cta">
+    <h2>Ready to Build Your Career?</h2>
+    <p>Try the demonstration features. No real account is created and no job application is sent to an employer.</p>
+    <button onclick="openModal('registerModal')">Get Started</button>
+</section>
+
+<section class="section" id="applications">
+    <div class="section-heading">
+        <span>YOUR CAREER ACTIVITY</span>
+        <h2>My Applications</h2>
+        <p>Jobs you have applied for</p>
+    </div>
+    <div id="applicationsList" class="applications-list"></div>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <div>
+            <a class="logo footer-logo" href="#home"><i class="fa-solid fa-briefcase"></i> Job<span>Hub</span></a>
+            <p>Academic demonstration project. Job listings and company details are sample content, not verified vacancies.</p>
+        </div>
+        <div>
+            <h3>Quick Links</h3>
+            <a href="#home">Home</a>
+            <a href="#jobs">Find Jobs</a>
+            <a href="#categories">Categories</a>
+        </div>
+        <div>
+            <h3>Contact</h3>
+            <p><i class="fa-solid fa-envelope"></i> support@jobhub.com</p>
+            <p><i class="fa-solid fa-phone"></i> +91 9343062081</p>
+        </div>
+    </div>
+    <p class="copyright">© 2026 Online JobHub. All Rights Reserved.</p>
+</footer>
+
+<!-- DEMO ACCESS: no password or personal details are requested -->
+<div class="modal" id="loginModal">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('loginModal')" aria-label="Close">&times;</button>
+        <h2>Explore JobHub Demo</h2>
+        <p>This is a student project preview. No account is created.</p>
+        <button type="button" class="form-btn" onclick="enterDemo()">Continue as Demo User</button>
+        <p class="message">Do not enter real passwords, email addresses, or other personal information.</p>
+    </div>
+</div>
+
+<div class="modal" id="registerModal">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal('registerModal')" aria-label="Close">&times;</button>
+        <h2>JobHub Demo</h2>
+        <p>Registration is not available because this website has no authentication server.</p>
+        <button type="button" class="form-btn" onclick="enterDemo()">Continue as Demo User</button>
+        <p class="message">This demonstration does not collect registration details.</p>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
